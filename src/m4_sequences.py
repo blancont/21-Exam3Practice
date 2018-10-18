@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  SEQUENCES.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Nathaniel Blanco.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -134,13 +134,18 @@ def practice_problem4a(sequence):
       :type sequence: list | tuple | string
     """
     ####################################################################
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 minutes.
     ####################################################################
+    list_of_indices = []
+    for index in range(len(sequence) - 1):
+        if sequence[index] == sequence[index + 1]:
+            list_of_indices = list_of_indices + [index]
+    return list_of_indices
 
 
 def run_test_practice_problem4b():
@@ -197,13 +202,19 @@ def practice_problem4b(sequence):
       :type sequence: (list | tuple) of (float | int)
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   10 minutes.
     ####################################################################
+    current_largest = sequence[0]
+
+    for index in range(len(sequence)):
+        if index % 2 == 0 and sequence[index] > current_largest:
+            current_largest = sequence[index]
+    return current_largest
 
 
 def run_test_practice_problem4c():
@@ -295,7 +306,7 @@ def practice_problem4c(points):
       :rtype: rg.Point | string
     """
     ####################################################################
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #     The testing code is already written for you (above).
     #
     # IMPORTANT: This problem is your LOWEST PRIORITY for preparing
@@ -306,6 +317,35 @@ def practice_problem4c(points):
     #    DIFFICULTY:      9
     #    TIME ESTIMATE:   15 minutes.
     ####################################################################
+    for point in range(len(points)):
+        x = points[point].x
+        y = points[point].y
+
+        # Checks if x is prime
+        number_of_factors = 0
+        x_is_prime = False
+        for number in range(1, x + 1):
+            if x % number == 0:
+                number_of_factors = number_of_factors + 1
+        if number_of_factors == 2:
+            x_is_prime = True
+
+        # Checks if y is prime
+        number_of_factors = 0
+        y_is_prime = False
+        for number in range(1, y + 1):
+            if y % number == 0:
+                number_of_factors = number_of_factors + 1
+        if number_of_factors == 2:
+            y_is_prime = True
+
+        if x_is_prime and y_is_prime is True:
+            temp_point = rg.Point(y, x)
+            points[point].x = temp_point.x
+            points[point].y = temp_point.y
+            return points[point]
+
+    return 'Not found'
 
 
 def run_test_practice_problem4d():
@@ -391,13 +431,20 @@ def practice_problem4d(sequence):
       :rtype: int
     """
     ####################################################################
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 minutes.
     ####################################################################
+    sum_num = 0
+    for number in range(len(sequence) - 1):
+        current_int = sequence[number]
+        next_int = sequence[number + 1]
+        if is_prime(current_int) and is_prime(next_int) is True and current_int != next_int:
+            sum_num = sum_num + current_int
+    return sum_num
 
 
 # ----------------------------------------------------------------------
