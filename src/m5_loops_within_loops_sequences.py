@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in SEQUENCES-OF-SUBSEQUENCES problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Nathaniel Blanco.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -38,7 +38,7 @@ def main():
 def run_test_integers():
     """ Tests the    integers    function. """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  integers  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
     #
@@ -71,6 +71,13 @@ def run_test_integers():
     print('Expected is:', expected)
     print('Actual is:  ', answer)
 
+    # Test 2:
+    arg = ([(5, 1, 4), ('',), (4,), (), (10,), []])
+    expect = [5, 1, 4, 4, 10]
+    actual = integers(arg)
+    print()
+    print('Expected vs actual:', expect, actual)
+
 
 def integers(sequence_of_sequences):
     """
@@ -95,7 +102,7 @@ def integers(sequence_of_sequences):
       :rtype: list of int
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -118,12 +125,19 @@ def integers(sequence_of_sequences):
     #    DIFFICULTY:      6
     #    TIME ESTIMATE:  10 minutes.
     # ------------------------------------------------------------------
+    new_list = []
+    for seq_in_seq in range(len(sequence_of_sequences)):
+        inner_sequence = sequence_of_sequences[seq_in_seq]
+        for index_in_inner_sequence in range(len(inner_sequence)):
+            if type(inner_sequence[index_in_inner_sequence]) is int:
+                new_list = new_list + [inner_sequence[index_in_inner_sequence]]
+    return new_list
 
 
 def run_test_big_letters():
     """ Tests the    big_letters    function. """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # DONE: 4. Implement this TEST function.
     #   It TESTS the  big_letters  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
     # ------------------------------------------------------------------
@@ -158,6 +172,21 @@ def run_test_big_letters():
                           ])
     print('Expected is:', expected)
     print('Actual is:  ', answer)
+
+    # Test 2:
+    arg = ['StrinG',
+           (),
+           [5, 1, "don't count mE"],
+           []
+           'count ME',
+           '',
+           ' ',
+           'BAZINGA']
+    should_return = 'SGEMEBAZINGA'
+    actually_returned = big_letters(arg)
+    print()
+    print('Expected:', should_return)
+    print('Actual:  ', actually_returned)
 
 
 def big_letters(sequence_of_sequences):
