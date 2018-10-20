@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in 2D GRAPHICS problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Nathaniel Blanco.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -89,7 +89,7 @@ def hourglass(window, n, point, radius, color):
     a color that rosegraphics understands.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #       We provided some tests for you (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -101,6 +101,57 @@ def hourglass(window, n, point, radius, color):
     #    DIFFICULTY:      8
     #    TIME ESTIMATE:  25 minutes (warning: this problem is challenging)
     # ------------------------------------------------------------------
+    rad = radius
+    diameter = rad * 2
+    center = point
+    circle = rg.Circle(center, rad)
+    circle.fill_color = color
+
+    line = rg.Line(rg.Point(center.x - rad, center.y), rg.Point(center.x + rad, center.y))
+    circle.attach_to(window)
+    line.attach_to(window)
+
+    for row in range(1, n):
+
+        circle_upper = circle.clone()
+        circle_upper.center.x = center.x - (diameter / 2) * row
+        circle_upper.center.y = center.y + ((diameter ** 2 - rad ** 2) ** (1 / 2)) * row
+        circle_upper.fill_color = color
+        line1 = rg.Line(rg.Point(circle_upper.center.x - rad, circle_upper.center.y),
+                        rg.Point(circle_upper.center.x + rad, circle_upper.center.y))
+
+        circle_lower = circle.clone()
+        circle_lower.center.x = center.x - (diameter / 2) * row
+        circle_lower.center.y = center.y - ((diameter ** 2 - rad ** 2) ** (1 / 2)) * row
+        circle_lower.fill_color = color
+        line2 = rg.Line(rg.Point(circle_lower.center.x - rad, circle_lower.center.y),
+                        rg.Point(circle_lower.center.x + rad, circle_lower.center.y))
+
+        circle_upper.attach_to(window)
+        circle_lower.attach_to(window)
+        line1.attach_to(window)
+        line2.attach_to(window)
+
+        for number_of_circles in range(row):
+
+            circle_in_upper_row = circle_upper.clone()
+            circle_in_upper_row.center.x = circle_upper.center.x + diameter * (number_of_circles + 1)
+            circle_in_upper_row.fill_color = color
+            line1 = rg.Line(rg.Point(circle_in_upper_row.center.x - rad, circle_in_upper_row.center.y),
+                            rg.Point(circle_in_upper_row.center.x + rad, circle_in_upper_row.center.y))
+
+            circle_in_lower_row = circle_lower.clone()
+            circle_in_lower_row.center.x = circle_lower.center.x + diameter * (number_of_circles + 1)
+            circle_in_lower_row.fill_color = color
+            line2 = rg.Line(rg.Point(circle_in_lower_row.center.x - rad, circle_in_lower_row.center.y),
+                            rg.Point(circle_in_lower_row.center.x + rad, circle_in_lower_row.center.y))
+
+            circle_in_upper_row.attach_to(window)
+            circle_in_lower_row.attach_to(window)
+            line1.attach_to(window)
+            line2.attach_to(window)
+
+    window.render()
 
 
 def run_test_many_hourglasses():
