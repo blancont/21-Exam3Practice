@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in PRINTING-TO-CONSOLE problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Nathaniel Blanco.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -75,7 +75,7 @@ def shape(r):
     For purposes of "lining up", assume r is a single digit.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Some tests are already written for you (above).
     #
     ####################################################################
@@ -87,6 +87,28 @@ def shape(r):
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:  15 minutes.
     # ------------------------------------------------------------------
+    for row in range(r):
+        string = ''
+
+        # First loop: Make spaces
+        for space in range(row):
+            string = string + ' '
+
+        # Second loop: Make plus signs
+        for plus in range(r - row):
+            string = string + '+'
+
+        string = string + '!'
+
+        # Third loop: Make numbers
+        for number in range(r - row, 0, -1):
+            string = string + str(number)
+
+        # Fourth loop: Make dashes
+        for dash in range(row):
+            string = string + '-'
+
+        print(string)
 
 
 # ----------------------------------------------------------------------
