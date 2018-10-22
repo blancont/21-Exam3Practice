@@ -214,7 +214,7 @@ def many_hourglasses(window, square, m, colors):
     each of which denotes a color that rosegraphics understands.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #       We provided some tests for you (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -230,6 +230,45 @@ def many_hourglasses(window, square, m, colors):
     #                         a correct "hourglass" function above)
     #    TIME ESTIMATE:  20 minutes (warning: this problem is challenging)
     # ------------------------------------------------------------------
+    counter = 0
+    for rectangle_iteration in range(m):
+
+        # Rectangle's width will be the circle's diameter plus another diameter
+        # for every additional row of the hourglass
+        # width = n * diameter
+        # Rectangle's height will be the circle's radius plus root 3 radius (Pythagorean theorem)
+        # for every additional row of the hourglass, multiplied by two
+
+        diameter = square.length_of_each_side
+
+        # These loops determine how far to move to the right for both corners
+        amount_of_diameters_1 = 0
+        amount_of_diameters_2 = 0
+        for rectangle_number in range(1, rectangle_iteration + 1):
+            amount_of_diameters_1 = amount_of_diameters_1 + rectangle_number
+
+        for rectangle_number in range(2, rectangle_iteration + 2):
+            amount_of_diameters_2 = amount_of_diameters_2 + rectangle_number
+
+        # Constructing the rectangle
+        corner_1 = rg.Point(square.center.x - diameter / 2 + amount_of_diameters_1 * diameter,
+                            square.center.y - (3 ** (1/2)) * (diameter / 2) * rectangle_iteration - (diameter / 2))
+        corner_2 = rg.Point(square.center.x + diameter / 2 + amount_of_diameters_2 * diameter,
+                            square.center.y + (3 ** (1/2)) * (diameter / 2) * rectangle_iteration + (diameter / 2))
+        rectangle = rg.Rectangle(corner_1, corner_2)
+        rectangle.attach_to(window)
+
+        # Determining the current color
+        color = colors[counter]
+        if counter == len(colors) - 1:
+            counter = 0
+        else:
+            counter = counter + 1
+
+        # Constructing the hourglass
+        hourglass(window, rectangle_iteration + 1, rectangle.get_center(), diameter / 2, color)
+
+        window.render()
 
 
 # ----------------------------------------------------------------------
